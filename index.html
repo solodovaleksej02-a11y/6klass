@@ -30,7 +30,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        /* Постер (твоя обложка) */
+        /* Постер (обложка) */
         .cover {
             position: absolute;
             top: 0;
@@ -83,12 +83,11 @@
             background-color: rgba(255, 0, 0, 1);
         }
 
-        /* Видеоплеер */
-        video {
+        /* Фрейм YouTube */
+        iframe {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            background-color: #000;
+            border: none;
         }
 
         /* Блок с описанием под видео */
@@ -133,28 +132,28 @@
             <div class="play-btn"></div>
         </div>
 
-        <!-- Контейнер под прямой видеоплеер -->
-        <div id="player" style="width:100%; height:100%;"></div>
+        <!-- Контейнер под YouTube iframe -->
+        <div id="player"></div>
     </div>
 
     <!-- Текстовый блок под видео -->
     <div class="description-card">
         <h2>Привет одноклассникам! 👋</h2>
         <p>
-            Мы уже в 6 классе! По пятницам у нас иногда бывают уроки труда (технологии), где мы занимаемся разными интересными вещами, а в остальное время — учение и творчество. 
+            Мы уже в 6 классе! По пятницам у нас иногда бывают уроки труда (технологии), где мы занимаемся разными интересными вещами, а в остальное время — учение и творчество. 
         </p>
         <p>
-            Специально для вас я собрал этот небольшой сайт-плеер, чтобы удобно смотреть видео. Приятного просмотра!
+            Специально для вас я собрал этот небольшой сайт-плеер, чтобы удобно смотреть видео. Пожиратели контента и любители крутых видео — приятного просмотра!
         </p>
-        
+        
         <div class="footer-credits">
             ⚙️ <b>Создатели сайта:</b> Лёша & Gemini (ИИ-помощник)
         </div>
     </div>
 
     <script>
-        // ID твоего файла на Google Диске
-        const DRIVE_FILE_ID = '1An9mfTHihQipVxTg9k0QfgL4ghhFmLqk';
+        // ID твоего видео
+        const YOUTUBE_VIDEO_ID = 'AYzUc-bAdVk';
 
         function playVideo() {
             const cover = document.getElementById('cover');
@@ -163,15 +162,13 @@
             // Скрываем обложку
             cover.classList.add('hidden');
 
-            // Прямая ссылка на файл с Google Диска
-            const videoUrl = `https://drive.google.com/uc?export=download&id=${DRIVE_FILE_ID}`;
-
-            // Вставляем встроенный плеер браузера
+            // Вставляем плеер с автозапуском
             playerContainer.innerHTML = `
-                <video controls autoplay playsinline width="100%" height="100%">
-                    <source src="${videoUrl}" type="video/mp4">
-                    Ваш браузер не поддерживает видео.
-                </video>
+                <iframe 
+                    src="https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&rel=0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
             `;
         }
     </script>
