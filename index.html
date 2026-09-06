@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наш Видеоплеер</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 16 / 9;
+            background-color: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Постер (обложка) */
+        .cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.postimg.cc/k47yM2c4/32-20260906151111.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            transition: opacity 0.4s ease;
+        }
+
+        .cover.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Кнопка «Play» */
+        .play-btn {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 0, 0, 0.85);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .play-btn::before {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 15px 0 15px 26px;
+            border-color: transparent transparent transparent #ffffff;
+            margin-left: 5px;
+        }
+
+        .cover:hover .play-btn {
+            transform: scale(1.1);
+            background-color: rgba(255, 0, 0, 1);
+        }
+
+        /* Фрейм YouTube */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Блок с описанием под видео */
+        .description-card {
+            width: 100%;
+            max-width: 800px;
+            margin-top: 20px;
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 1px solid #333;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .description-card h2 {
+            margin-top: 0;
+            color: #ff4757;
+            font-size: 1.4rem;
+        }
+
+        .description-card p {
+            line-height: 1.6;
+            color: #ddd;
+            font-size: 1rem;
+        }
+
+        .footer-credits {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-container">
+        <!-- Обложка -->
+        <div class="cover" id="cover" onclick="playVideo()">
+            <div class="play-btn"></div>
+        </div>
+
+        <!-- Контейнер под YouTube iframe -->
+        <div id="player"></div>
+    </div>
+
+    <!-- Текстовый блок под видео -->
+    <div class="description-card">
+        <h2>Привет одноклассникам! 👋</h2>
+        <p>
+            Мы уже в 6 классе! По пятницам у нас иногда бывают уроки труда (технологии), где мы занимаемся разными интересными вещами, а в остальное время — учение и творчество. 
+        </p>
+        <p>
+            Специально для вас я собрал этот небольшой сайт-плеер, чтобы удобно смотреть видео. Пожиратели контента и любители крутых видео — приятного просмотра!
+        </p>
+        
+        <div class="footer-credits">
+            ⚙️ <b>Создатели сайта:</b> Лёша & Gemini (ИИ-помощник)
+        </div>
+    </div>
+
+    <script>
+        // ID твоего видео
+        const YOUTUBE_VIDEO_ID = 'AYzUc-bAdVk';
+
+        function playVideo() {
+            const cover = document.getElementById('cover');
+            const playerContainer = document.getElementById('player');
+
+            // Скрываем обложку
+            cover.classList.add('hidden');
+
+            // Вставляем плеер с автозапуском
+            playerContainer.innerHTML = `
+                <iframe 
+                    src="https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&rel=0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            `;
+        }
+    </script>
+</body>
+</html>
