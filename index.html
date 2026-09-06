@@ -30,7 +30,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        /* Постер (обложка) */
+        /* Постер (твоя обложка) */
         .cover {
             position: absolute;
             top: 0;
@@ -83,7 +83,7 @@
             background-color: rgba(255, 0, 0, 1);
         }
 
-        /* Фрейм YouTube */
+        /* Фрейм Google Диска */
         iframe {
             width: 100%;
             height: 100%;
@@ -132,7 +132,7 @@
             <div class="play-btn"></div>
         </div>
 
-        <!-- Контейнер под YouTube iframe -->
+        <!-- Контейнер под плеер Google Диска -->
         <div id="player"></div>
     </div>
 
@@ -143,7 +143,7 @@
             Мы уже в 6 классе! По пятницам у нас иногда бывают уроки труда (технологии), где мы занимаемся разными интересными вещами, а в остальное время — учение и творчество. 
         </p>
         <p>
-            Специально для вас я собрал этот небольшой сайт-плеер, чтобы удобно смотреть видео. Пожиратели контента и любители крутых видео — приятного просмотра!
+            Специально для вас я собрал этот небольшой сайт-плеер, чтобы удобно смотреть видео. Приятного просмотра!
         </p>
         
         <div class="footer-credits">
@@ -152,8 +152,8 @@
     </div>
 
     <script>
-        // ID твоего видео
-        const YOUTUBE_VIDEO_ID = 'AYzUc-bAdVk';
+        // ID твоего видео с Google Диска
+        const DRIVE_FILE_ID = '1An9mfTHihQipVxTg9k0QfgL4ghhFmLqk';
 
         function playVideo() {
             const cover = document.getElementById('cover');
@@ -162,11 +162,11 @@
             // Скрываем обложку
             cover.classList.add('hidden');
 
-            // Вставляем плеер с автозапуском
+            // Вставляем встроенный плеер Google Диска
             playerContainer.innerHTML = `
                 <iframe 
-                    src="https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&rel=0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    src="https://drive.google.com/file/d/${DRIVE_FILE_ID}/preview" 
+                    allow="autoplay" 
                     allowfullscreen>
                 </iframe>
             `;
