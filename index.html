@@ -83,11 +83,12 @@
             background-color: rgba(255, 0, 0, 1);
         }
 
-        /* Фрейм Google Диска */
-        iframe {
+        /* Видеоплеер */
+        video {
             width: 100%;
             height: 100%;
-            border: none;
+            object-fit: contain;
+            background-color: #000;
         }
 
         /* Блок с описанием под видео */
@@ -132,8 +133,8 @@
             <div class="play-btn"></div>
         </div>
 
-        <!-- Контейнер под плеер Google Диска -->
-        <div id="player"></div>
+        <!-- Контейнер под прямой видеоплеер -->
+        <div id="player" style="width:100%; height:100%;"></div>
     </div>
 
     <!-- Текстовый блок под видео -->
@@ -152,7 +153,7 @@
     </div>
 
     <script>
-        // ID твоего видео с Google Диска
+        // ID твоего файла на Google Диске
         const DRIVE_FILE_ID = '1An9mfTHihQipVxTg9k0QfgL4ghhFmLqk';
 
         function playVideo() {
@@ -162,13 +163,15 @@
             // Скрываем обложку
             cover.classList.add('hidden');
 
-            // Вставляем встроенный плеер Google Диска
+            // Прямая ссылка на файл с Google Диска
+            const videoUrl = `https://drive.google.com/uc?export=download&id=${DRIVE_FILE_ID}`;
+
+            // Вставляем встроенный плеер браузера
             playerContainer.innerHTML = `
-                <iframe 
-                    src="https://drive.google.com/file/d/${DRIVE_FILE_ID}/preview" 
-                    allow="autoplay" 
-                    allowfullscreen>
-                </iframe>
+                <video controls autoplay playsinline width="100%" height="100%">
+                    <source src="${videoUrl}" type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
             `;
         }
     </script>
